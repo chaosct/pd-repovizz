@@ -1,0 +1,47 @@
+#N canvas 220 278 621 466 10;
+#X text 18 7 This patch receives osc signals and stores the (resampled)
+data as csv files for repovizz;
+#X obj 25 56 mrpeach/udpreceive 5555;
+#X obj 25 80 mrpeach/unpackOSC;
+#N canvas 599 285 630 361 testsend 0;
+#X obj 59 168 mrpeach/udpsend;
+#X obj 59 137 mrpeach/packOSC;
+#X msg 176 132 connect localhost 5555;
+#X msg 61 82 /myo/pose mac first;
+#X obj 516 173 random 100;
+#X msg 508 145 bang;
+#X obj 506 76 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 468 211 5 0 0 0 - - -;
+#X obj 515 206 / 10;
+#X msg 465 250 \$1 \$1 \$1;
+#X msg 215 81 /myo/accel mac \$1 \$2 \$3;
+#X obj 501 102 metro 10;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 1 0;
+#X connect 4 0 8 0;
+#X connect 5 0 4 0;
+#X connect 6 0 11 0;
+#X connect 7 0 9 0;
+#X connect 8 0 7 0;
+#X connect 9 0 10 0;
+#X connect 10 0 1 0;
+#X connect 11 0 5 0;
+#X restore 495 31 pd testsend;
+#X obj 180 60 tgl 30 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X obj 175 124 s recording;
+#X obj 25 103 s OSC_in;
+#X obj 30 198 filestore myo/accel 1;
+#X obj 272 103 metro 100;
+#X obj 272 124 s record_tick;
+#X floatatom 323 73 5 0 0 0 - - -;
+#X text 363 74 Resampling rate;
+#X text 176 196 Filestore OSC_addr index_of_argument_to_save;
+#X connect 1 0 2 0;
+#X connect 2 0 6 0;
+#X connect 4 0 5 0;
+#X connect 4 0 8 0;
+#X connect 8 0 9 0;
+#X connect 10 0 8 1;
