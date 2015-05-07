@@ -1,0 +1,11 @@
+#N canvas 818 312 450 300 10;
+#X declare -lib mrpeach -lib moocow;
+#X obj 90 81 streamer;
+#X msg 78 33 read 1_ECG.csv;
+#X msg 135 56 10;
+#X obj 99 126 print;
+#X text 181 32 set filename;
+#X text 175 59 start with framerate;
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 1;
