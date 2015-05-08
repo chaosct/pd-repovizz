@@ -1,0 +1,13 @@
+#N canvas 986 319 421 223 10;
+#X declare -lib mrpeach;
+#X obj 310 17 import mrpeach;
+#X obj 36 62 udpreceive 7777;
+#X obj 36 86 unpackOSC;
+#X obj 36 111 routeOSC /ECG;
+#X obj 36 135 list-drip;
+#X floatatom 36 166 5 0 0 0 - - -;
+#X text 30 12 This patch receives osc signals from bitalino;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
